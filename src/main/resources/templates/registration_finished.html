@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="cs" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Registrace dokoncena</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
+    <link rel="icon" type="image/png" href="/images/favicon.png">
+    <link rel="stylesheet" type="text/css" href="/style.css"/>
+</head>
+<body>
+
+<div class="registration-form">
+    <form style="width: 500px;" class="row g-3" th:action="@{/}" method="post">
+        <h1 class="display-6">Registrace dokoncena</h1>
+        <div class="col-md-6">
+            <label for="name" class="form-label">Jmeno</label>
+            <input type="text" class="form-control" id="name" th:field="${form.name}" readonly>
+        </div>
+        <div class="col-md-6">
+            <label for="surname" class="form-label">Prijmeni</label>
+            <input type="text" class="form-control" id="surname" th:field="${form.surname}" readonly>
+        </div>
+        <div class="col-md-6">
+            <label for="birthday" class="form-label">Datum narozeni</label>
+            <input type="date" class="form-control" id="birthday" th:field="${form.birthday}" readonly>
+        </div>
+        <div class="col-md-6">
+            <label for="gender" class="form-label">Pohlavi</label>
+            <select disabled class="form-select" aria-label="Default select example" id="gender" th:field="*{form.gender}" >
+                <option th:each="genderOpt : ${T(cz.czechitas.java2webapps.ukol5.controller.Gender).values()}"
+                        th:value="${genderOpt}"
+                        th:text="${genderOpt.genderName}">
+                </option>
+            </select>
+        </div>
+        <div class="col-md-12">
+            <span>Vybrane sporty:  </span>
+            <span th:each="sport : ${form.sport}" th:text="${sport.sportName} + '   '"/>
+        </div>
+        <div class="col-md-12">
+            <label for="turnus" class="form-label">Turnus</label>
+            <select disabled class="form-select" aria-label="Default select example" th:field="${form.sessionDate}" id="turnus">
+                <option th:each="sessionOpt : ${T(cz.czechitas.java2webapps.ukol5.controller.SessionDate).values()}" th:value="${sessionOpt}" th:text="${sessionOpt.sessionDate}"></option>
+            </select>
+        </div>
+        <div class="col-6">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="email" th:field="${form.email}" readonly >
+        </div>
+        <div class="col-6">
+            <label for="phone" class="form-label">Telefon</label>
+            <input type="text" class="form-control" id="phone" th:field="${form.phone}" readonly>
+        </div>
+    </form>
+</div>
+</body>
+</html>
